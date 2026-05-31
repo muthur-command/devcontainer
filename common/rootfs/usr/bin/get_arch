@@ -8,7 +8,7 @@ case $(arch) in
       case $mode in
           unix)
             echo "x86_64";;
-          docker|ha)
+          docker|mc)
             echo "amd64";;
           qemu)
             echo "x86-64";;
@@ -16,7 +16,7 @@ case $(arch) in
     ;;
     aarch64|arm64)
       case $mode in
-          unix|ha)
+          unix|mc)
             echo "aarch64";;
           docker)
             echo "arm64";;

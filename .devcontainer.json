@@ -1,4 +1,4 @@
 {
-	"name": "home-assistant/devcontainer",
+	"name": "muthur-command/devcontainer",
 	"image": "mcr.microsoft.com/devcontainers/base:bookworm"
 }

@@ -1,23 +1,20 @@
-# devcontainer
+# Muthur Command Devcontainer
 
-This project contains custom devcontainers for use in our repositories.
+Custom devcontainers for use in Muthur Command OS repositories.
 
 
 ## Images
 
 Image | Description | Dockerfile
--- | -- | -- 
-`ghcr.io/home-assistant/devcontainer:apps` | For Home Assistant App development | [./apps/Dockerfile](./apps/Dockerfile)
-`ghcr.io/home-assistant/devcontainer:supervisor` | For Supervisor development | [./supervisor/Dockerfile](./supervisor/Dockerfile)
+-- | -- | --
+`ghcr.io/muthur-command/devcontainer:apps` | For Muthur Command app development | [./apps/Dockerfile](./apps/Dockerfile)
+`ghcr.io/muthur-command/devcontainer:supervisor` | For Supervisor development | [./supervisor/Dockerfile](./supervisor/Dockerfile)
 
-Versioned images are available with the custom devcontainer version prepended (e.g. `1-supervisor`). This loosly resembles what
-upstream devcontainers are providing as well. The version is meant to be incremented when non-backwards compatible changes are
-made. That allows existing devcontainer configuration to work while updating the devcontainers (e.g. when the Supervisor devcontainer
-is updated to a new Python version).
+Versioned images are available with the custom devcontainer version prepended (e.g. `4-supervisor`). This loosely resembles what upstream devcontainers provide as well. The version is meant to be incremented when non-backwards compatible changes are made. That allows existing devcontainer configuration to work while updating the devcontainers (e.g. when the Supervisor devcontainer is updated to a new Python version).
 
 ## Example files
 
-Example files to use with Visual Studio Code 
+Example files to use with Visual Studio Code
 
 ### Apps
 
@@ -32,6 +29,11 @@ Example files for the `apps` devcontainer
 
 ### `apps` and `supervisor`
 
-- Use the command `supervisor_run` to start Home Assistant inside the devcontainer, or run the task "Start Home Assistant" if you copied the tasks file.
-- Use `ha` to use the custom Home Assistant CLI (Needs the supervisor to be running).
+- Use the command `supervisor_run` to start Muthur Command inside the devcontainer, or run the task "Start Muthur Command" if you copied the tasks file.
+- Use `mc` to use the Muthur Command CLI (needs the supervisor to be running).
 
+## Origin
+
+- **Upstream:** [home-assistant/devcontainer](https://github.com/home-assistant/devcontainer) — upstream source repository (ported to Muthur Command OS).
+- **In this repo:** **Muthur Command** keeps this copy for Muthur Command OS development; images and behavior may diverge from upstream over time.
+- **License:** Code inherited from upstream remains **Apache-2.0**; see [`LICENSE`](./LICENSE).

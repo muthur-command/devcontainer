@@ -6,7 +6,7 @@ source /etc/supervisor_scripts/common
 
 WD="${WORKSPACE_DIRECTORY:=/workspaces/supervisor}"
 DOCKERFILE_PATH="${WD}/Dockerfile"
-SUPERVISOR_IMAGE_LOCAL="ghcr.io/home-assistant/${HA_ARCH}-hassio-supervisor:latest"
+SUPERVISOR_IMAGE_LOCAL="ghcr.io/muthur-command/${MC_ARCH}-mcos-supervisor:latest"
 
 function get_build_from() {
     local build_from
@@ -30,7 +30,7 @@ function build_supervisor() {
     docker pull "${base_image}"
     cosign verify \
           --certificate-oidc-issuer https://token.actions.githubusercontent.com \
-          --certificate-identity-regexp https://github.com/home-assistant/docker-base/.* \
+          --certificate-identity-regexp https://github.com/muthur-command/docker-base/.* \
           "${base_image}"
 
     docker buildx build \
@@ -45,7 +45,7 @@ function run_supervisor() {
 
     echo "Start Supervisor"
     docker run --rm --privileged \
-        --name hassio_supervisor \
+        --name mcos_supervisor \
         --privileged \
         --security-opt seccomp=unconfined \
         --security-opt apparmor=unconfined \
@@ -56,7 +56,7 @@ function run_supervisor() {
         -v /etc/machine-id:/etc/machine-id:ro \
         -v "${WD}:/usr/src/supervisor" \
         -e SUPERVISOR_SHARE="/mnt/supervisor" \
-        -e SUPERVISOR_NAME=hassio_supervisor \
+        -e SUPERVISOR_NAME=mcos_supervisor \
         -e SUPERVISOR_DEV=1 \
         -e SUPERVISOR_MACHINE="qemu${QEMU_ARCH}" \
         -e SUPERVISOR_SYSTEMD_JOURNAL_GATEWAYD_URL="http://172.30.32.1:19531/" \
@@ -64,9 +64,9 @@ function run_supervisor() {
 }
 
 
-if [ "$( docker container inspect -f '{{.State.Status}}' hassio_supervisor )" == "running" ]; then
+if [ "$( docker container inspect -f '{{.State.Status}}' mcos_supervisor )" == "running" ]; then
     echo "Restarting Supervisor"
-    docker rm -f hassio_supervisor
+    docker rm -f mcos_supervisor
     cleanup_lastboot
     run_supervisor
 else

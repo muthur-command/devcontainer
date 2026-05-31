@@ -10,7 +10,7 @@ function run_supervisor() {
     validate_devcontainer "apps"
 
     docker run --rm --privileged \
-        --name hassio_supervisor \
+        --name mcos_supervisor \
         --privileged \
         --security-opt seccomp=unconfined \
         --security-opt apparmor=unconfined \
@@ -20,7 +20,7 @@ function run_supervisor() {
         -v /mnt/supervisor:/data:rw \
         -v /etc/machine-id:/etc/machine-id:ro \
         -e SUPERVISOR_SHARE="/mnt/supervisor" \
-        -e SUPERVISOR_NAME=hassio_supervisor \
+        -e SUPERVISOR_NAME=mcos_supervisor \
         -e SUPERVISOR_DEV=1 \
         -e SUPERVISOR_MACHINE="qemu${QEMU_ARCH}" \
         -e SUPERVISOR_SYSTEMD_JOURNAL_GATEWAYD_URL="http://172.30.32.1:19531/" \
@@ -28,9 +28,9 @@ function run_supervisor() {
 }
 
 
-if [ "$( docker container inspect -f '{{.State.Status}}' hassio_supervisor )" == "running" ]; then
+if [ "$( docker container inspect -f '{{.State.Status}}' mcos_supervisor )" == "running" ]; then
     echo "Restarting Supervisor"
-    docker rm -f hassio_supervisor
+    docker rm -f mcos_supervisor
     cleanup_lastboot
     run_supervisor
 else

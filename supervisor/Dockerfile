@@ -45,7 +45,7 @@ COPY ./supervisor/rootfs /
 
 # Set up venv for UV
 USER vscode
-ENV VIRTUAL_ENV="/home/vscode/.local/ha-venv"
+ENV VIRTUAL_ENV="/home/vscode/.local/mc-venv"
 RUN uv venv $VIRTUAL_ENV
 
 # Setting PATH here isn't enough, VSCode rewites it after initial scripts finish
@@ -72,7 +72,7 @@ RUN systemd-tmpfiles --create --prefix /var/log/journal
 
 # Enable services which are otherwise disabled by default
 RUN systemctl enable \
-    haos-agent \
+    muthur-command-agent \
     systemd-journal-gatewayd
 
 STOPSIGNAL SIGRTMIN+3

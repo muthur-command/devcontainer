@@ -3,10 +3,10 @@ name: Builder
 on:
   pull_request:
     branches:
-      - main
+      - mc
   push:
     branches:
-      - main
+      - mc
 
 jobs:
   build:

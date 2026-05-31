@@ -2,13 +2,13 @@
 
 set -e
 
-VERSION_INFO=$(curl -sf https://version.home-assistant.io/dev.json)
-HA_ARCH=$(get_arch ha)
+VERSION_INFO=$(curl -sf https://version.muthur-command.com/dev.json)
+MC_ARCH=$(get_arch mc)
 QEMU_ARCH=$(get_arch qemu)
 SUPERVISOR_SHARE="/mnt/supervisor"
 
 export SUPERVISOR_VERSION="$(echo ${VERSION_INFO} | jq -e -r '.supervisor')"
-export SUPERVISOR_IMAGE="$(sed "s/{arch}/${HA_ARCH}/g" <<< "$(echo ${VERSION_INFO} | jq -e -r '.images.supervisor')")"
+export SUPERVISOR_IMAGE="$(sed "s/{arch}/${MC_ARCH}/g" <<< "$(echo ${VERSION_INFO} | jq -e -r '.images.supervisor')")"
 
 
 function cleanup_lastboot() {
@@ -35,12 +35,12 @@ validate_devcontainer() {
     if ! grep -q "$SUPERVISOR_SHARE" /proc/mounts; then
         echo ""
         echo "WARNING: $SUPERVISOR_SHARE is not a mount! This might cause issues for the"
-        echo "Home Assistant Core media and share folders mount propagation option. Make"
+        echo "Muthur Command Core media and share folders mount propagation option. Make"
         echo "sure to update your .devcontainer."
         echo ""
         if [ "$devcontainer_type" == "apps" ]; then
             echo "You can find the template for apps here:"
-            echo "https://github.com/home-assistant/devcontainer/blob/main/apps/devcontainer.json"
+            echo "https://github.com/muthur-command/devcontainer/blob/main/apps/devcontainer.json"
             echo ""
         fi
         # For some tests this might be good enough, so create a directory to make things

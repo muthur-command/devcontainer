@@ -51,7 +51,7 @@ RUN systemd-tmpfiles --create --prefix /var/log/journal
 
 # Enable services which are otherwise disabled by default
 RUN systemctl enable \
-    haos-agent \
+    muthur-command-agent \
     systemd-journal-gatewayd
 
 STOPSIGNAL SIGRTMIN+3
